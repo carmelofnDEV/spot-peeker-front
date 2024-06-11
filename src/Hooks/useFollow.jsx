@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { env } from "../env";
+import Cookies from "js-cookie";
+
+
+
 
 export const useFollow = ({ username = null, isFollow = false }) => {
   const [follow, setFollow] = useState(isFollow);
 
   const onFollow = async () => {
-    const data = { profile: username };
+      
+    const data = { 
+      profile: username,
+      "auth_token":Cookies.get("auth_token"),
+
+
+     };
     console.log(username);
     try {
       const response = await fetch(`${env.SERVER_URL}/follow/`, {

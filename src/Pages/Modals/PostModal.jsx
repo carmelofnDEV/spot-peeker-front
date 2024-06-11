@@ -8,6 +8,7 @@ import { CommentInput } from "../Components/CommentInput";
 import { CommentsSection } from "../Components/CommentsSection";
 import { useComments } from "../../Hooks/useComments";
 import { EditPost } from "../Components/EditPost";
+import Cookies from "js-cookie";
 
 export const PostModal = ({
   onClose,
@@ -32,6 +33,8 @@ export const PostModal = ({
   const handleLike = async () => {
     const data = {
       post: singlePost.id,
+      "auth_token":Cookies.get("auth_token"),
+
     };
 
     try {

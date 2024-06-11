@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { env } from "../../env";
+import Cookies from "js-cookie";
+
+
+
 
 export const DeletePostModal = ({
   isOpen,
@@ -11,9 +15,10 @@ export const DeletePostModal = ({
   const handleOnDeletePost = async () => {
     const info = {
       post_id: singlePost.id,
+      "auth_token":Cookies.get("auth_token"),
+
     };
 
-    console.log(info); // Verifica si la información del post es correcta en la consola del navegador
 
     try {
       const response = await fetch(`${env.SERVER_URL}/eliminar-post/`, {

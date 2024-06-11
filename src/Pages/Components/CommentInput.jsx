@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { env } from "../../env";
+import Cookies from "js-cookie";
 
 
 
@@ -9,11 +10,14 @@ export const CommentInput = ({setPostComments,postComments,id}) => {
 
     e.preventDefault();
 
+  
+
     const formData = new FormData(e.target);
     if (formData.get("comentario").length > 0) {
       const data = {
         post: id,
         comentario: formData.get("comentario"),
+        "auth_token":Cookies.get("auth_token"),
       };
       e.target.reset();
       try {

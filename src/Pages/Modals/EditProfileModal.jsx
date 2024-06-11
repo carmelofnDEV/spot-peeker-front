@@ -30,8 +30,15 @@ export const EditProfileModal = ({
 
   const handleEdit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
-    console.log("OPTION",privateOption,"CXURRENT",profileInfo.es_privado)
+
+    const authToken = {
+      "auth_token":Cookies.get("auth_token"),
+    };
+      
+      
+
     if (
       profileInfo.userData.username != username.current.value ||
       profileInfo.profileData.biografia != bio.current.value ||
@@ -42,6 +49,7 @@ export const EditProfileModal = ({
       formData.append("es_privado", privateOption);
 
       try {
+
         const response = await fetch(`${env.SERVER_URL}/edit-profile/`, {
           method: "POST",
           body: formData,

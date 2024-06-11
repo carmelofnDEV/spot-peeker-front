@@ -10,6 +10,7 @@ import { ProfileInfo } from "./ProfileInfo";
 import { ProfileLoader } from "../Loaders/ProfileLoader";
 import { ToastNotifications } from "./Components/ToastNotifications";
 import { ProfileNotFound } from "./ProfileNotFound";
+import Cookies from "js-cookie";
 
 export const Perfil = ({ logged = false }) => {
   const { pathname } = useLocation();
@@ -56,8 +57,6 @@ export const Perfil = ({ logged = false }) => {
 
         setTimeout(() => {
           setLoading(false);
-          
-
         }, 1000);
       } else {
         setNotFound(true);
@@ -111,7 +110,10 @@ export const Perfil = ({ logged = false }) => {
   }, [currentUser, usernameProfile]);
 
   const handleOnFollow = async () => {
-    const data = { profile: profileInfo.userData.username };
+    const data = {
+      profile: profileInfo.userData.username,
+      auth_token: Cookies.get("auth_token"),
+    };
 
     try {
       const response = await fetch(`${SERVER_URL}/follow/`, {
@@ -154,7 +156,6 @@ export const Perfil = ({ logged = false }) => {
             handleOnFollow={handleOnFollow}
             isOwner={isOwner}
             profileInfo={profileInfo}
-
           />
         </Suspense>
 

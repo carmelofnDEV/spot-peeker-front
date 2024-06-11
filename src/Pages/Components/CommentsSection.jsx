@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../Hooks/useUser";
 import { env } from "../../env";
+import Cookies from "js-cookie";
 
 export const CommentsSection = ({ postComments=[], logged, isOwner ,setPostComments}) => {
 
@@ -39,17 +40,28 @@ export const CommentsSection = ({ postComments=[], logged, isOwner ,setPostComme
   const handleDelete = async (commentId) => {
 
     console.log(commentId)
+
+
+  const authToken = {
+    "auth_token":Cookies.get("auth_token"),
+    };
+    
+  
+
     try {
       const response = await fetch(
         `${env.SERVER_URL}/delete-comment/${commentId}`,
         {
           method: "POST",
           credentials: "include",
+          body: JSON.stringify(authToken),
+
 
         }
       );
       const data = await response.json();
       console.log("eliminado? ", data);
+
       if (data.status == "success") {
         const newComm = postComments.filter((comment) => comment.id != commentId)
         setPostComments(newComm);

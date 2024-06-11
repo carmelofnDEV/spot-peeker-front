@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 
+
 export const useAuth = () => {
   const navigate = useNavigate();
 
@@ -47,13 +48,21 @@ export const useAuth = () => {
   };
 
   const onLogout = async() => {
+    
+    const authToken = {
+      "auth_token":Cookies.get("auth_token"),
+    };
+      
 
     try {
       const response = await fetch(`${SERVER_URL}/logout/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          
         },
+      body: JSON.stringify(authToken),
+
         credentials: "include",
       });
       const data = await response.json();
