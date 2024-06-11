@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Modal } from "./Components/Modal";
 import { NotFeedHome } from "./NotFeedHome";
 import { HomeLoader } from "./HomeLoader";
+import Cookies from "js-cookie";
+
 
 export const Home = ({ logged }) => {
   const SERVER_URL = env.SERVER_URL;
@@ -14,10 +16,19 @@ export const Home = ({ logged }) => {
   const [notFeed, setNotFeed] = useState(false);
 
   const getFeed = async () => {
+
+
+    const authToken = {
+    "auth_token":Cookies.get("auth_token"),
+    };
+
+
     try {
       const response = await fetch(`${SERVER_URL}/user_feed/`, {
         method: "POST",
         credentials: "include",
+        body: JSON.stringify(authToken),
+
       });
 
       const data = await response.json();

@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 import { DeletePostModal } from "./Modals/DeletePostModal";
 import { GlobalContext } from "../context/GlobalContext";
 import { ToastNotifications } from "./Components/ToastNotifications";
+import Cookies from "js-cookie";
+
+
+
 
 export const Publicar = () => {
   const { toasts, setToast, toastViewed } = useContext(GlobalContext);
@@ -108,6 +112,10 @@ export const Publicar = () => {
       }
 
       console.log("ID  ", JSON.stringify(tags));
+
+      const authToken = Cookies.get("auth_token");
+
+      formData.append("auth_token", authToken);
 
       const response = await fetch(fetch_url, {
         method: "POST",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { env } from "../../env";
+import Cookies from "js-cookie";
 
 export const NotificationsModal = ({
   notifyCounter,
@@ -10,16 +11,22 @@ export const NotificationsModal = ({
   const [notifications, setNotifications] = useState([]);
 
   const getNotifications = async () => {
+    const authToken = {
+      auth_token: Cookies.get("auth_token"),
+    };
+
     try {
       const response = await fetch(`${env.SERVER_URL}/notifications/`, {
         method: "POST",
         credentials: "include",
+        body: JSON.stringify(authToken),
+
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-      console.log("noti",data);
+      console.log("noti", data);
       setNotifications(data.notifications);
       let unviewed = 0;
       data.notifications.forEach((element) => {
@@ -27,8 +34,7 @@ export const NotificationsModal = ({
           unviewed++;
         }
       });
-      setNotifyCounter(unviewed)
-
+      setNotifyCounter(unviewed);
     } catch (error) {
       console.error("Server Error:", error);
       return null;
@@ -80,7 +86,7 @@ export const NotificationsModal = ({
                     >
                       {notification.emisor}
                     </a>
-                    
+
                     {notification.action === "l"
                       ? " ha dado like a una publicación"
                       : " ha empezado a seguirte"}
