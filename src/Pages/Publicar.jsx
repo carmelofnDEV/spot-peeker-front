@@ -29,24 +29,38 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
+
     const fetchPhotos = async () => {
       const photosArray = await Promise.all(
         singlePost.imagenes.map(async (imagen) => {
-          const imageUrl = `${env.SERVER_S3}/media/${imagen.imagen}`;
-          const response = await fetch(imageUrl);
+
+          console.log("Imagen -----",imagen.imagen)
+
+
+          const response = await fetch(
+            `${env.SERVER_S3}/media/${imagen.imagen}`
+          );
           const blob = await response.blob();
-          
-          return {
-            imageUrl: imageUrl,
-            file: blob, 
-          };
+
+          let fileExtension = imagen.imagen.split(".").pop();
+
+          console.log("fileEx", fileExtension);
+          if (fileExtension == undefined) {
+            fileExtension = "png";
+          }
+
+          return new File(
+            [blob],
+            imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
+            { type: `image/${fileExtension}` }
+          );
         })
       );
       setPhotos(photosArray);
     };
-  
+
     fetchPhotos();
-  }, [singlePost]);
+  }, []);
 
   const SERVER_URL = env.SERVER_URL;
   const navigate = useNavigate();
@@ -205,10 +219,10 @@ export const Publicar = () => {
             <div className="grid grid-cols-4 gap-3">
               {photos.map((file, index) => (
                 <div key={index} className="relative group">
-                  {file.imageUrl ? (
+                  {file.url ? (
                     <img
-                      src={file.imageUrl}
-                      alt={`Foto ${index} aws3`}
+                      src={file.preview}
+                      alt={`Foto ${index}`}
                       className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff]"
                     />
                   ) : (
