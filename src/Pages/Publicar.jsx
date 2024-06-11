@@ -34,11 +34,11 @@ export const Publicar = () => {
       const photosArray = await Promise.all(
         singlePost.imagenes.map(async (imagen) => {
 
-          console.log("Imagen -----",imagen.imagen)
+          console.log("Imagen -----",imagen)
 
 
           const response = await fetch(
-            `${env.SERVER_S3}/media/${imagen.imagen}`,
+            `${env.SERVER_S3}/media/${imagen}`,
             {
               mode: 'no-cors'
             }
