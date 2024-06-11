@@ -9,9 +9,6 @@ import { GlobalContext } from "../context/GlobalContext";
 import { ToastNotifications } from "./Components/ToastNotifications";
 import Cookies from "js-cookie";
 
-
-
-
 export const Publicar = () => {
   const { toasts, setToast, toastViewed } = useContext(GlobalContext);
 
@@ -29,27 +26,23 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
-
     const fetchPhotos = async () => {
       const photosArray = await Promise.all(
         singlePost.imagenes.map(async (imagen) => {
-
-          console.log("Imagen -----",imagen)
-
-
           const response = await fetch(
-            `${env.SERVER_S3}/media/${imagen}`,
+            `${env.SERVER_S3}/media/${imagen.imagen}`,
             {
-              mode: 'no-cors'
+              headers: {
+                "Content-Type": "application/octet-stream",
+                "Access-Control-Allow-Origin": "*",
+              },
             }
           );
           const blob = await response.blob();
 
           let fileExtension = imagen.imagen.split(".").pop();
-
-          console.log("fileEx", fileExtension);
-          if (fileExtension == undefined) {
-            fileExtension = "png";
+          if (!fileExtension) {
+            fileExtension = "jpg"; // Por defecto si no hay extensión
           }
 
           return new File(
@@ -63,7 +56,7 @@ export const Publicar = () => {
     };
 
     fetchPhotos();
-  }, []);
+  }, [singlePost]);
 
   const SERVER_URL = env.SERVER_URL;
   const navigate = useNavigate();
@@ -175,13 +168,9 @@ export const Publicar = () => {
     }
   }, []);
 
-
   useEffect(() => {
-    
-  
-    console.log("FOTOOOS ---",photos)
-  }, [photos])
-  
+    console.log("FOTOOOS ---", photos);
+  }, [photos]);
 
   return (
     <>
@@ -224,7 +213,7 @@ export const Publicar = () => {
                 <div key={index} className="relative group">
                   {file.url ? (
                     <img
-                      src={file.preview}
+                      src={URL.createObjectURL(file)}
                       alt={`Foto ${index}`}
                       className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff]"
                     />
