@@ -14,7 +14,7 @@ export const ProfileNotFound = () => {
             >
               <img
                 className="border-[1px] bg-white rounded-full w-[200px] h-[200px] object-scale-down	"
-                src={`${env.SERVER_URL}/media/pics_profile/default.png`}
+                src={`${env.SERVER_S3}/media/pics_profile/default.png`}
                 alt="foto_perfil"
               />
 

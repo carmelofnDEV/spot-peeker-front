@@ -8,7 +8,6 @@ import { ToastNotifications } from '../Components/ToastNotifications';
 
 export const Login = () => {
   const navigate = useNavigate();
-  const SERVER_URL = env.SERVER_URL;
   const {
     checkLoginCredentials,
     onChangeLoginInput,
@@ -78,6 +77,10 @@ export const Login = () => {
 
         <div className="flex justify-center">
           <button className="bg-[#627254] p-2 rounded">Iniciar sesión</button>
+        </div>
+
+        <div className='mt-5'>
+            <a href="/register">Crear cuenta</a>
         </div>
 
         <ReCAPTCHA

@@ -9,12 +9,19 @@ export const useUser = () => {
 
   const getUser = async () => {
 
+    const authToken = {
+      "auth_token":Cookies.get("auth_token"),
+    };
+      
+
 
     try {
 
       const response = await fetch(`${SERVER_URL}/getUser/`, {
         method: "POST",
         credentials: 'include',
+      body: JSON.stringify(authToken),
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -31,26 +38,3 @@ export const useUser = () => {
   return { getUser };
 };
 
-const checkSession = async () => {
-    
-  const authToken = {
-    "auth_token":Cookies.get("auth_token"),
-  };
-
-
-  try {
-      const response = await fetch(`${SERVER_URL}/verify-cookie/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    console.log("logged?",data)
-
-    setIsLoggedIn( data.valid);
-  } catch (error) {
-    console.error("Server Error:", error);
-    setIsLoggedIn(false);
-  }
-};
