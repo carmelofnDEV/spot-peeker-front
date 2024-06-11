@@ -32,8 +32,11 @@ useEffect(() => {
   const fetchPhotos = async () => {
     const photosArray = await Promise.all(
       singlePost.imagenes.map(async (imagen) => {
-        
+
         console.log("imagen ",imagen)
+        
+        console.log("URL ",`${env.SERVER_S3}/media/${imagen.imagen}`,)
+
 
 
         const response = await fetch(`${env.SERVER_S3}/media/${imagen.imagen}`, {
