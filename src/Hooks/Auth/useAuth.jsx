@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-
-
 export const useAuth = () => {
   const navigate = useNavigate();
 
@@ -16,52 +14,48 @@ export const useAuth = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
   const [errors, setErrors] = useState({});
 
-
-  const handleOnChangePassword = async() => {
+  const handleOnChangePassword = async () => {
+    const authToken = {
+      auth_token: Cookies.get("auth_token"),
+    };
 
     try {
       const response = await fetch(`${SERVER_URL}/change-password/`, {
         method: "POST",
 
         credentials: "include",
+        body: JSON.stringify(authToken),
       });
+
       const data = await response.json();
 
       console.log("respuesta servidoraa, ", data);
 
       if (data.status == "success") {
-
         return true;
-        
-      }else{
+      } else {
         return false;
       }
-
     } catch (error) {
       console.error("Server Error:", error);
       return false;
     }
-    
   };
 
-  const onLogout = async() => {
-    
+  const onLogout = async () => {
     const authToken = {
-      "auth_token":Cookies.get("auth_token"),
+      auth_token: Cookies.get("auth_token"),
     };
-      
 
     try {
       const response = await fetch(`${SERVER_URL}/logout/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          
         },
-      body: JSON.stringify(authToken),
+        body: JSON.stringify(authToken),
 
         credentials: "include",
       });
@@ -70,18 +64,15 @@ export const useAuth = () => {
       console.log("respuesta servidoraa, ", data);
 
       if (data.status == true) {
-        Cookies.remove('auth_token');
+        Cookies.remove("auth_token");
         return true;
-
-      }else{
+      } else {
         return false;
       }
-
     } catch (error) {
       console.error("Server Error:", error);
       return false;
     }
-    
   };
 
   const onChangeRegisterInput = (e) => {
@@ -111,16 +102,11 @@ export const useAuth = () => {
       const data = await response.json();
 
       return data;
-      
     } catch (error) {
-
       console.error("Server Error:", error);
 
       return false;
-
     }
-
-
   };
 
   const checkLoginCredentials = async (e) => {
@@ -149,17 +135,13 @@ export const useAuth = () => {
     checkSession();
   }, [navigate]);
 
-
-
   const checkSession = async () => {
-    
     const authToken = {
-      "auth_token":Cookies.get("auth_token"),
+      auth_token: Cookies.get("auth_token"),
     };
 
-
     try {
-        const response = await fetch(`${SERVER_URL}/verify-cookie/`, {
+      const response = await fetch(`${SERVER_URL}/verify-cookie/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -167,9 +149,9 @@ export const useAuth = () => {
         body: JSON.stringify(authToken),
       });
       const data = await response.json();
-      console.log("logged?",data)
+      console.log("logged?", data);
 
-      setIsLoggedIn( data.valid);
+      setIsLoggedIn(data.valid);
     } catch (error) {
       console.error("Server Error:", error);
       setIsLoggedIn(false);
@@ -193,13 +175,10 @@ export const useAuth = () => {
     setErrors,
     errors,
     navigate,
-    isLoggedIn, 
+    isLoggedIn,
     setIsLoggedIn,
     checkSession,
     onLogout,
-    handleOnChangePassword
-
-
-    
+    handleOnChangePassword,
   };
 };

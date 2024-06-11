@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { env } from "../../env";
 import { useAuth } from "../../Hooks/Auth/useAuth";
+import Cookies from "js-cookie";
 
 export const EditProfileModal = ({
   onSuccess,
