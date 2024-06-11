@@ -28,45 +28,25 @@ export const Publicar = () => {
     setDeleteMolaOpen(false);
   };
 
-useEffect(() => {
-  const fetchPhotos = async () => {
-    const photosArray = await Promise.all(
-      singlePost.imagenes.map(async (imagen) => {
-
-        console.log("imagen ",imagen)
-        
-        console.log("URL ",`${env.SERVER_S3}/media/${imagen.imagen}`,)
-
-
-
-        const response = await fetch(`${env.SERVER_S3}/media/${imagen.imagen}`, {
-          mode: 'no-cors'
-        });
-
-        console.log("response ",response)
-
-        const blob = await response.blob();
-        console.log("BLOL ",blob)
-
-
-
-        let fileExtension = imagen.imagen.split(".").pop();
-        if (!fileExtension) {
-          fileExtension = "jpg"; // Por defecto si no hay extensión
-        }
-
-        return new File(
-          [blob],
-          imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
-          { type: `image/${fileExtension}` }
-        );
-      })
-    );
-    setPhotos(photosArray);
-  };
-
-  fetchPhotos();
-}, [singlePost]);
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const photosArray = await Promise.all(
+        singlePost.imagenes.map(async (imagen) => {
+          const imageUrl = `${env.SERVER_S3}/media/${imagen.imagen}`;
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          
+          return {
+            imageUrl: imageUrl,
+            file: blob, 
+          };
+        })
+      );
+      setPhotos(photosArray);
+    };
+  
+    fetchPhotos();
+  }, [singlePost]);
 
   const SERVER_URL = env.SERVER_URL;
   const navigate = useNavigate();
@@ -225,10 +205,10 @@ useEffect(() => {
             <div className="grid grid-cols-4 gap-3">
               {photos.map((file, index) => (
                 <div key={index} className="relative group">
-                  {file.url ? (
+                  {file.imageUrl ? (
                     <img
-                      src={URL.createObjectURL(file)}
-                      alt={`Foto ${index}`}
+                      src={file.imageUrl}
+                      alt={`Foto ${index} aws3`}
                       className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff]"
                     />
                   ) : (
