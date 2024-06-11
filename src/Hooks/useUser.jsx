@@ -12,7 +12,8 @@ export const useUser = () => {
     const authToken = {
       "auth_token":Cookies.get("auth_token"),
     };
-      
+    
+    console.log("cookie",authToken)
 
 
     try {
