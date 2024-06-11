@@ -7,12 +7,18 @@ export const useUserProfile = () => {
   const SERVER_URL = env.SERVER_URL;
 
   const getUserProfile = async (username) => {
+    const authToken = {
+      "auth_token":Cookies.get("auth_token"),
+      };
+      
     try {
       const response = await fetch(
         `${SERVER_URL}/getUserProfile/${username}`,
         {
           method: "POST",
           credentials: "include",
+          body: JSON.stringify(authToken),
+
           headers: {
             "Content-Type": "application/json",
           },
