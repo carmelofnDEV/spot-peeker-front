@@ -9,6 +9,9 @@ import { GlobalContext } from "../context/GlobalContext";
 import { ToastNotifications } from "./Components/ToastNotifications";
 import Cookies from "js-cookie";
 
+
+
+
 export const Publicar = () => {
   const { toasts, setToast, toastViewed } = useContext(GlobalContext);
 
@@ -25,38 +28,32 @@ export const Publicar = () => {
     setDeleteMolaOpen(false);
   };
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      const photosArray = await Promise.all(
-        singlePost.imagenes.map(async (imagen) => {
-          const response = await fetch(
-            `${env.SERVER_S3}/media/${imagen.imagen}`,
-            {
-              headers: {
-                "Content-Type": "application/octet-stream",
-                "Access-Control-Allow-Origin": "*",
-              },
-            }
-          );
-          const blob = await response.blob();
+useEffect(() => {
+  const fetchPhotos = async () => {
+    const photosArray = await Promise.all(
+      singlePost.imagenes.map(async (imagen) => {
+        const response = await fetch(
+          `${env.SERVER_S3}/media/${imagen.imagen}`,
+        );
+        const blob = await response.blob();
 
-          let fileExtension = imagen.imagen.split(".").pop();
-          if (!fileExtension) {
-            fileExtension = "jpg"; // Por defecto si no hay extensión
-          }
+        let fileExtension = imagen.imagen.split(".").pop();
+        if (!fileExtension) {
+          fileExtension = "jpg"; // Por defecto si no hay extensión
+        }
 
-          return new File(
-            [blob],
-            imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
-            { type: `image/${fileExtension}` }
-          );
-        })
-      );
-      setPhotos(photosArray);
-    };
+        return new File(
+          [blob],
+          imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
+          { type: `image/${fileExtension}` }
+        );
+      })
+    );
+    setPhotos(photosArray);
+  };
 
-    fetchPhotos();
-  }, [singlePost]);
+  fetchPhotos();
+}, [singlePost]);
 
   const SERVER_URL = env.SERVER_URL;
   const navigate = useNavigate();
@@ -168,9 +165,13 @@ export const Publicar = () => {
     }
   }, []);
 
+
   useEffect(() => {
-    console.log("FOTOOOS ---", photos);
-  }, [photos]);
+    
+  
+    console.log("FOTOOOS ---",photos)
+  }, [photos])
+  
 
   return (
     <>
