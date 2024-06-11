@@ -32,10 +32,20 @@ useEffect(() => {
   const fetchPhotos = async () => {
     const photosArray = await Promise.all(
       singlePost.imagenes.map(async (imagen) => {
+        
+        console.log("imagen ",imagen)
+
+
         const response = await fetch(`${env.SERVER_S3}/media/${imagen.imagen}`, {
           mode: 'no-cors'
         });
+
+        console.log("response ",response)
+
         const blob = await response.blob();
+        console.log("BLOL ",blob)
+
+
 
         let fileExtension = imagen.imagen.split(".").pop();
         if (!fileExtension) {
