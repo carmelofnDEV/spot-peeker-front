@@ -33,45 +33,34 @@ export const Publicar = () => {
     const fetchPhotos = async () => {
       const photosArray = await Promise.all(
         singlePost.imagenes.map(async (imagen) => {
-          try {
-            console.log("Imagen -----", imagen.imagen);
-    
-            const response = await fetch(
-              `${env.SERVER_S3}/media/${imagen.imagen}`,
-              {
-                mode: 'no-cors'
-              }
-            );
-            const arrayBuffer = await response.arrayBuffer();
-    
-            let fileExtension = imagen.imagen.split(".").pop();
-    
-            console.log("fileEx", fileExtension);
-            if (fileExtension === undefined) {
-              fileExtension = "png";
+
+          console.log("Imagen -----",imagen.imagen)
+
+
+          const response = await fetch(
+            `${env.SERVER_S3}/media/${imagen.imagen}`,
+            {
+                mode: 'cors'
             }
-    
-            // Crear un objeto File a partir del ArrayBuffer
-            const file = new File(
-              [arrayBuffer],
-              imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
-              { type: `image/${fileExtension}` }
-            );
-    
-            return file;
-          } catch (error) {
-            console.error('Error al recuperar la imagen:', error);
-            return null;
+          );
+          const blob = await response.blob();
+
+          let fileExtension = imagen.imagen.split(".").pop();
+
+          console.log("fileEx", fileExtension);
+          if (fileExtension == undefined) {
+            fileExtension = "png";
           }
+
+          return new File(
+            [blob],
+            imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
+            { type: `image/${fileExtension}` }
+          );
         })
       );
-    
-      // Filtrar cualquier elemento nulo que pueda haberse devuelto debido a errores
-      const filteredPhotosArray = photosArray.filter(photo => photo !== null);
-    
-      setPhotos(filteredPhotosArray);
+      setPhotos(photosArray);
     };
-    
 
     fetchPhotos();
   }, []);
