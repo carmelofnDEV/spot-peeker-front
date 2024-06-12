@@ -85,7 +85,7 @@ export const CommentsSection = ({ postComments=[], logged, isOwner ,setPostComme
           <div className="w-12 h-12 overflow-hidden rounded-full">
             <img
               className="object-cover w-full h-full"
-              src={`${env.SERVER_S3}/${comment.pic}`}
+              src={`${comment.pic}`}
               alt={`comment_pic_${index}`}
             />
           </div>
