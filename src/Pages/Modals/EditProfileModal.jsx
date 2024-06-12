@@ -273,6 +273,7 @@ export const EditProfileModal = ({
                 <div className="flex  items-end">
                   <div>
                     <button
+                      type="button"
                       onClick={handleLogOut}
                       className="flex items-center  gap-1 py-2 px-4 bg-gray-100 rounded-lg"
                     >

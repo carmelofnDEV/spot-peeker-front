@@ -18,7 +18,7 @@ export const useAuth = () => {
 
   const handleOnChangePassword = async () => {
     const authToken = {
-      auth_token: Cookies.get("auth_token"),
+      "auth_token": Cookies.get("auth_token"),
     };
 
     try {
