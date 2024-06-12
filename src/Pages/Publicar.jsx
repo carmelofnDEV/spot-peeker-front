@@ -41,9 +41,13 @@ export const Publicar = () => {
           const response = await fetch(
             `${env.SERVER_S3}/media/${imagen.imagen}`,
             {
-                mode: 'cors'
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
             }
         );
+        
 
         console.log("Response -----",response)
 

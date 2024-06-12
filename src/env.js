@@ -1,7 +1,6 @@
 export const env = {
-
-    SERVER_URL : "https://spot-peeker-8c1041f40c34.herokuapp.com",
-    SERVER_S3:"https://spot-peeker-media.s3.eu-north-1.amazonaws.com",
-    GOOGLE_MAPS_KEY: "AIzaSyDL8SdIHvdO0nvIfw-BgUn3cIi9YKlIcaQ",
-
-}
+    SERVER_URL: process.env.SERVER_URL,
+    SERVER_S3: process.env.SERVER_S3,
+    GOOGLE_MAPS_KEY: process.env.GOOGLE_MAPS_KEY,
+    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY
+  };

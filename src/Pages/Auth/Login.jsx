@@ -85,7 +85,7 @@ export const Login = () => {
 
         <ReCAPTCHA
           ref={recaptchaRef}
-          sitekey="6LfZQvQpAAAAAHTb_2JimitBDn8rsoc1FBEwT129"
+          sitekey={env.RECAPTCHA_KEY}
           onChange={handleCaptchaChange}
           size="invisible"
         />
