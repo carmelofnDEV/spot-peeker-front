@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { env } from "../env";
 import { ProfileLoader } from "../Loaders/ProfileLoader";
+import { useAuth } from "../Hooks/Auth/useAuth";
 
 export const ChangePasswordForm = () => {
+  const { onLogout } = useAuth();
+
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
@@ -71,7 +74,10 @@ export const ChangePasswordForm = () => {
       }, 1200);
 
       if (data.status == "success") {
+
+        onLogout();
         navigate("/login")
+
       }else{
         setErrors(data.errors)
       }

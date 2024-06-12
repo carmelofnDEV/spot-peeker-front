@@ -3,15 +3,11 @@ import { useAuth } from "../../Hooks/Auth/useAuth";
 import { env } from "../../env";
 
 export const ChangePassword = () => {
-  const { handleOnChangePassword, onLogout } = useAuth();
+  const { handleOnChangePassword } = useAuth();
 
   const onSendMail = async () => {
     const resp = await handleOnChangePassword();
     console.log(resp);
-  };
-
-  const acceptButton = async () => {
-    onLogout()
   };
 
   useEffect(() => {
@@ -37,7 +33,9 @@ export const ChangePassword = () => {
             </p>
             <div className="flex w-full justify-end py-4 mt-5">
               <button
-                onClick={acceptButton}
+              onClick={()=>{
+                
+              }}
                 className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80"
               >
                 <span className="text-[18px] font-[700]">Ok</span>
