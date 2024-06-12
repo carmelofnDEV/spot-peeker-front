@@ -41,7 +41,7 @@ export const Publicar = () => {
           const response = await fetch(
             `${env.SERVER_S3}/media/${imagen.imagen}`,
             {
-                mode: 'no-cors'
+                mode: 'cors'
             }
         );
 
