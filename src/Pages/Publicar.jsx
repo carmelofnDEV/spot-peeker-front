@@ -36,6 +36,7 @@ export const Publicar = () => {
 
           console.log("Imagen -----",imagen.imagen)
 
+          console.log("IMAGEN URL -----",`${env.SERVER_S3}/media/${imagen.imagen}`)
 
           const response = await fetch(
             `${env.SERVER_S3}/media/${imagen.imagen}`,
