@@ -43,7 +43,12 @@ export const Publicar = () => {
                 mode: 'cors'
             }
         );
+
+        console.log("Response -----",response)
+
           const blob = await response.blob();
+
+
 
           let fileExtension = imagen.imagen.split(".").pop();
 

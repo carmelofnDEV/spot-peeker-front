@@ -3,7 +3,7 @@ import { useAuth } from "../../Hooks/Auth/useAuth";
 import { env } from "../../env";
 
 export const ChangePassword = () => {
-  const { handleOnChangePassword } = useAuth();
+  const { handleOnChangePassword, onLogout } = useAuth();
 
   const onSendMail = async () => {
     const resp = await handleOnChangePassword();
@@ -32,11 +32,9 @@ export const ChangePassword = () => {
               contraseña.
             </p>
             <div className="flex w-full justify-end py-4 mt-5">
-              <button
-              onClick={()=>{
-                
-              }}
+              <a
                 className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80"
+                href="/"
               >
                 <span className="text-[18px] font-[700]">Ok</span>
                 <svg
@@ -56,7 +54,7 @@ export const ChangePassword = () => {
                   <title id="okIconTitle">{"Ok"}</title>
                   <polyline points="4 13 9 18 20 7" />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
         </div>
