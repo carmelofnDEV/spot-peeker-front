@@ -9,9 +9,6 @@ import { GlobalContext } from "../context/GlobalContext";
 import { ToastNotifications } from "./Components/ToastNotifications";
 import Cookies from "js-cookie";
 
-
-
-
 export const Publicar = () => {
   const { toasts, setToast, toastViewed } = useContext(GlobalContext);
 
@@ -29,41 +26,53 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
-
     const fetchPhotos = async () => {
-      const photosArray = await Promise.all(
-        singlePost.imagenes.map(async (imagen) => {
+      try {
+        const photosArray = await Promise.all(
+          singlePost.imagenes
+            .map(async (imagen) => {
+              console.log(
+                "IMAGEN URL -----",
+                `${env.SERVER_S3}/media/${imagen.imagen}`
+              );
 
-          console.log("Imagen -----",imagen.imagen)
+              const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
+              const options = {
+                method: "GET",
+                mode: "cors", // Mantén el modo 'cors'
+                headers: {
+                  // Puedes añadir otros encabezados aquí si es necesario
+                },
+              };
 
-          console.log("IMAGEN URL -----",`${env.SERVER_S3}/media/${imagen.imagen}`)
+              const response = await fetch(url, options);
 
-          const response = await fetch(
-            `${env.SERVER_S3}/media/${imagen.imagen}`,
+              // Verifica el estado de la respuesta
+              if (!response.ok) {
+                console.error(
+                  `Failed to fetch image ${imagen.imagen}: ${response.status} ${response.statusText}`
+                );
+                return null;
+              }
+
+              const blob = await response.blob();
+
+              let fileExtension = imagen.imagen.split(".").pop() || "png";
+              console.log("fileEx", fileExtension);
+
+              return new File(
+                [blob],
+                imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
+                { type: `image/${fileExtension}` }
+              );
+            })
+            .filter((photo) => photo !== null) // Filtra elementos nulos
         );
-        
 
-        console.log("Response -----",response)
-
-          const blob = await response.blob();
-
-
-
-          let fileExtension = imagen.imagen.split(".").pop();
-
-          console.log("fileEx", fileExtension);
-          if (fileExtension == undefined) {
-            fileExtension = "png";
-          }
-
-          return new File(
-            [blob],
-            imagen.imagen.substring(imagen.imagen.lastIndexOf("/") + 1),
-            { type: `image/${fileExtension}` }
-          );
-        })
-      );
-      setPhotos(photosArray);
+        setPhotos(photosArray);
+      } catch (error) {
+        console.error("Error fetching photos:", error);
+      }
     };
 
     fetchPhotos();
@@ -179,13 +188,9 @@ export const Publicar = () => {
     }
   }, []);
 
-
   useEffect(() => {
-    
-  
-    console.log("FOTOOOS ---",photos)
-  }, [photos])
-  
+    console.log("FOTOOOS ---", photos);
+  }, [photos]);
 
   return (
     <>
