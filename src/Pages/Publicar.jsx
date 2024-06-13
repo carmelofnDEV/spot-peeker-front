@@ -9,6 +9,9 @@ import { GlobalContext } from "../context/GlobalContext";
 import { ToastNotifications } from "./Components/ToastNotifications";
 import Cookies from "js-cookie";
 
+
+
+
 export const Publicar = () => {
   const { toasts, setToast, toastViewed } = useContext(GlobalContext);
 
@@ -26,48 +29,30 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
-    const fetchWithRetry = async (url, options, retries = 20) => {
-      for (let i = 0; i < retries; i++) {
-        try {
-          const response = await fetch(url, options);
-          if (response.ok) {
-            return response;
-          } else {
-            console.log(`Attempt ${i + 1} failed: ${response.statusText}`);
-          }
-        } catch (error) {
-          console.log(`Attempt ${i + 1} failed: ${error.message}`);
-        }
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Optional: wait 1 second between attempts
-      }
-      throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
-    };
 
     const fetchPhotos = async () => {
       const photosArray = await Promise.all(
         singlePost.imagenes.map(async (imagen) => {
-          console.log("Imagen -----", imagen.imagen);
-          console.log(
-            "IMAGEN URL -----",
-            `${env.SERVER_S3}/media/${imagen.imagen}`
-          );
 
-          const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
-          const options = {
-            mode: "no-cors",
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-            },
-          };
+          console.log("Imagen -----",imagen.imagen)
 
-          const response = await fetchWithRetry(url, options);
-          console.log("Response -----", response);
+          console.log("IMAGEN URL -----",`${env.SERVER_S3}/media/${imagen.imagen}`)
+
+          const response = await fetch(
+            `${env.SERVER_S3}/media/${imagen.imagen}`,
+        );
+        
+
+        console.log("Response -----",response)
 
           const blob = await response.blob();
 
+
+
           let fileExtension = imagen.imagen.split(".").pop();
+
           console.log("fileEx", fileExtension);
-          if (fileExtension === undefined) {
+          if (fileExtension == undefined) {
             fileExtension = "png";
           }
 
@@ -78,7 +63,6 @@ export const Publicar = () => {
           );
         })
       );
-
       setPhotos(photosArray);
     };
 
@@ -195,9 +179,13 @@ export const Publicar = () => {
     }
   }, []);
 
+
   useEffect(() => {
-    console.log("FOTOOOS ---", photos);
-  }, [photos]);
+    
+  
+    console.log("FOTOOOS ---",photos)
+  }, [photos])
+  
 
   return (
     <>
