@@ -38,14 +38,11 @@ export const Publicar = () => {
 
               const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
               const options = {
-                method: "GET",
-                mode: "cors", // Mantén el modo 'cors'
-                headers: {
-                  // Puedes añadir otros encabezados aquí si es necesario
-                },
+                mode: "cors",
+
               };
 
-              const response = await fetch(url, options);
+              const response = await fetch(url);
 
               // Verifica el estado de la respuesta
               if (!response.ok) {
