@@ -54,7 +54,7 @@ export const Publicar = () => {
 
           const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
           const options = {
-            mode: "cors",
+            mode: "no-cors",
             headers: {
               "Access-Control-Allow-Origin": "*",
             },
@@ -78,7 +78,7 @@ export const Publicar = () => {
           );
         })
       );
-      
+
       setPhotos(photosArray);
     };
 
