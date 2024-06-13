@@ -18,19 +18,29 @@ export const Login = () => {
   const recaptchaRef = useRef();
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    recaptchaRef.current.execute();
-    loginCredentials(event);
+    try {
+      const token = await recaptchaRef.current.executeAsync();
+      console.log('Token de reCAPTCHA:', token);
 
+      if (token) {
+        await loginCredentials(event);
+      } else {
+        setErrors({ captcha: 'La verificación del reCAPTCHA falló. Inténtalo de nuevo.' });
+      }
+    } catch (error) {
+      console.error('Error ejecutando reCAPTCHA:', error);
+      setErrors({ captcha: 'Error ejecutando reCAPTCHA. Inténtalo de nuevo.' });
+    }
   };
 
-
-
-  const loginCredentials = async () => {
+  const loginCredentials = async (event) => {
     let data = await checkLoginCredentials(event);
     if (data.status === "error") {
       setErrors(data.errors);
+      recaptchaRef.current.reset();
+
     } else {
       Cookies.set('auth_token', data.response.cookie, { expires: 1, path: '/' });
       navigate("/");
@@ -39,9 +49,9 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-20 w-[100%] p-5 ">
-      <form onSubmit={(e)=>{handleLogin(e)}} className="lg:w-1/3 flex flex-col bg-[#dddddd] px-8 py-5 rounded-xl gap-5">
-        <div className="flex justify-center ">
+    <div className="flex justify-center items-center mt-20 w-[100%] p-5">
+      <form onSubmit={handleLogin} className="lg:w-1/3 flex flex-col bg-[#dddddd] px-8 py-5 rounded-xl gap-5">
+        <div className="flex justify-center">
           <img
             className="w-[80%]"
             src={`${env.SERVER_S3}/static/logo-home.png`}
@@ -53,12 +63,12 @@ export const Login = () => {
           <label htmlFor="email">Usuario o Correo:</label>
           <input onChange={onChangeLoginInput} type="text" id="email" required />
           {errors.unverified_email && (
-            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px] ">
+            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px]">
               {errors.unverified_email}
             </span>
           )}
           {errors.not_email && (
-            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px] ">
+            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px]">
               {errors.not_email}
             </span>
           )}
@@ -68,20 +78,25 @@ export const Login = () => {
           <label htmlFor="password">Contraseña:</label>
           <input onChange={onChangeLoginInput} type="password" id="password" required />
           {errors.bad_password && (
-            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px] ">
+            <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px]">
               {errors.bad_password}
             </span>
           )}
         </div>
 
+        {errors.captcha && (
+          <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px]">
+            {errors.captcha}
+          </span>
+        )}
+
         <div className="flex justify-center">
-          <button className="bg-[#627254] p-2 rounded">Iniciar sesión</button>
+          <button className="bg-[#627254] p-2 rounded" type="submit">Iniciar sesión</button>
         </div>
 
         <div className='mt-5'>
-            <a href="/register">Crear cuenta</a>
-            <a href="/recovery-password">Recuperar contraseña</a>
-
+          <a href="/register">Crear cuenta</a>
+          <a href="/recovery-password">Recuperar contraseña</a>
         </div>
 
         <ReCAPTCHA

@@ -69,7 +69,6 @@ export const Publicar = () => {
     };
 
     fetchPhotos();
-    console.log(singlePost)
   }, []);
 
   const SERVER_URL = env.SERVER_URL;
@@ -170,10 +169,6 @@ export const Publicar = () => {
   };
 
 
-  useEffect(() => {
-    console.log(tags)
-  }, [tags]);
- 
 
 
 
