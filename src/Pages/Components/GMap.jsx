@@ -15,7 +15,6 @@ export const GMap = ({
 
   useEffect(() => {
     if (defaultMarker.length != 0) {
-      console.log(defaultMarker);
       setCenter(defaultMarker[0]);
       setMarkers(defaultMarker);
     }

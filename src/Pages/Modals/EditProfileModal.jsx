@@ -18,6 +18,8 @@ export const EditProfileModal = ({
     }
   };
 
+
+
   const [privateOption, setPrivateOption] = useState(profileInfo.es_privado);
 
   const username = useRef(null);
@@ -34,11 +36,7 @@ export const EditProfileModal = ({
 
     const formData = new FormData();
 
-    const authToken = {
-      "auth_token":Cookies.get("auth_token"),
-    };
-      
-      
+    const auth_token = Cookies.get("auth_token");
 
     if (
       profileInfo.userData.username != username.current.value ||
@@ -48,23 +46,24 @@ export const EditProfileModal = ({
       formData.append("username", username.current.value);
       formData.append("biografia", bio.current.value);
       formData.append("es_privado", privateOption);
+      formData.append("auth_token", auth_token);
 
       try {
-
         const response = await fetch(`${env.SERVER_URL}/edit-profile/`, {
           method: "POST",
           body: formData,
           credentials: "include",
         });
         const data = await response.json();
-        console.log(data);
 
         if (data.status == "success") {
           setErrors({});
-
           onSuccess();
         } else {
-          setErrors(data.errors);
+          if (data.errors) {
+            setErrors(data.errors);
+          }
+
         }
       } catch (error) {
         console.error("Error al subir la imagen:", error);
@@ -75,21 +74,16 @@ export const EditProfileModal = ({
   };
 
   useEffect(() => {
-    
-  
-    setPrivateOption(profileInfo.es_privado)
-    console.log("INFO-",profileInfo)
-  }, [profileInfo])
+    setPrivateOption(profileInfo.es_privado);
+  }, [profileInfo]);
 
-  useEffect(() => {
-    
-  
-    console.log("priv-",privateOption)
-  }, [privateOption])
-  
+  const handleClose = () => {
+    setErrors({});
+    onClose()
+  }
+
 
   const changeOption = (e) => {
-    console.log(e.target.checked);
     setPrivateOption(!privateOption);
   };
 
@@ -100,7 +94,7 @@ export const EditProfileModal = ({
           <div className=" w-full max-w-md bg-white rounded-lg overflow-y-auto">
             <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-4">
               <h3 className="font-semibold text-lg">Ajustes del perfil</h3>
-              <button className="text-white p-1 rounded-lg" onClick={onClose}>
+              <button className="text-white p-1 rounded-lg" onClick={handleClose}>
                 <svg
                   width="24px"
                   height="24px"
@@ -204,9 +198,6 @@ export const EditProfileModal = ({
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:"
                     placeholder="Cuéntanos sobre ti..."
                     defaultValue={profileInfo.profileData.biografia}
-                    onChange={(e) => {
-                      setBiografia(e.target.value);
-                    }}
                   ></textarea>
                   {errors.large_bio && (
                     <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px] ">

@@ -66,12 +66,8 @@ export const PostModal = ({
 
   useEffect(() => {
     setIsLiking(singlePost.liked_by_user);
-    console.log("LIKED?", singlePost.liked_by_user);
   }, []);
 
-  useEffect(() => {
-    console.log("CHANGE LIKED?", singlePost.liked_by_user);
-  }, [isLiking]);
 
   return (
     <>

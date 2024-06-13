@@ -16,10 +16,9 @@ export const ChangePasswordForm = () => {
   const pass = useRef(null);
   const repeat = useRef(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const verifyToken = async () => {
-    console.log(token);
     const dataT = {
       token: token,
     };
@@ -52,7 +51,6 @@ export const ChangePasswordForm = () => {
 
   const handloChangePassword = async (e) => {
     e.preventDefault();
-    console.log(token);
 
     const dataT = {
       pass: pass.current.value,
@@ -74,12 +72,10 @@ export const ChangePasswordForm = () => {
       }, 1200);
 
       if (data.status == "success") {
-
         onLogout();
-        navigate("/login")
-
-      }else{
-        setErrors(data.errors)
+        navigate("/login");
+      } else {
+        setErrors(data.errors);
       }
     } catch (error) {
       setTimeout(() => {
@@ -179,33 +175,28 @@ export const ChangePasswordForm = () => {
                   )}
                 </div>
                 <div className="flex w-full justify-end py-4 mt-5">
-                <button
-                  className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80"
-                 
-                >
-                  <span>Cambiar contraseña</span>
-                  <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-labelledby="okIconTitle"
-                    stroke="#000000"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    color="#000000"
-                  >
-                    <title id="okIconTitle">{"Ok"}</title>
-                    <polyline points="4 13 9 18 20 7" />
-                  </svg>
-                </button>
-              </div>
+                  <button className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80">
+                    <span>Cambiar contraseña</span>
+                    <svg
+                      width="24px"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-labelledby="okIconTitle"
+                      stroke="#000000"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      fill="none"
+                      color="#000000"
+                    >
+                      <title id="okIconTitle">{"Ok"}</title>
+                      <polyline points="4 13 9 18 20 7" />
+                    </svg>
+                  </button>
+                </div>
               </form>
-
-
             </div>
           </div>
         </div>

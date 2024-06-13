@@ -6,7 +6,7 @@ export const FollowersModal = ({ user, isOpen, onClose }) => {
 
   const getFollowers = async () => {
     const userData = {
-      "username": user,
+      username: user,
     };
 
     try {
@@ -19,14 +19,16 @@ export const FollowersModal = ({ user, isOpen, onClose }) => {
         body: JSON.stringify(userData),
       });
       const data = await response.json();
-      console.log("followers", data);
       setSeguidores(data.followers);
       let unviewed = 0;
-      data.notifications.forEach((element) => {
-        if (!element.viewed) {
-          unviewed++;
-        }
-      });
+
+      if (data.notifications) {
+        data.notifications.forEach((element) => {
+          if (!element.viewed) {
+            unviewed++;
+          }
+        });
+      }
       setNotifyCounter(unviewed);
     } catch (error) {
       console.error("Server Error:", error);
@@ -72,7 +74,7 @@ export const FollowersModal = ({ user, isOpen, onClose }) => {
                     >
                       <img
                         className="rounded-full w-12"
-                        src={`${env.SERVER_URL}${seguidor.pic}`}
+                        src={seguidor.pic}
                         alt="pic_follower"
                       />
                       <span className="font-semibold text-2xl ">

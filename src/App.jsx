@@ -11,6 +11,7 @@ import { ChangePassword } from "./Pages/Auth/ChangePassword";
 import { GlobalProvider } from "./context/GlobalContext";
 import { VerifyMail } from "./Pages/VerifyMail";
 import { ChangePasswordForm } from "./Pages/ChangePasswordForm";
+import { RecoveryForm } from "./Pages/RecoveryForm";
 
 export const App = () => {
   const { isLoggedIn } = useAuth();
@@ -45,6 +46,7 @@ export const App = () => {
           />
           <Route path="/verify-email/:token" element={<VerifyMail />} />
           <Route path="/change-password/:token" element={<ChangePasswordForm />} />
+          <Route path="/recovery-password/" element={<RecoveryForm />} />
 
           
         </Routes>

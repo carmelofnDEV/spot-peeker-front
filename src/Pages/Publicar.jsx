@@ -26,20 +26,17 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
+    
     const fetchPhotos = async () => {
       try {
         const photosArray = await Promise.all(
           singlePost.imagenes
             .map(async (imagen) => {
-              console.log(
-                "IMAGEN URL -----",
-                `${env.SERVER_S3}/media/${imagen.imagen}`
-              );
+
 
               const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
               const options = {
                 mode: "cors",
-
               };
 
               const response = await fetch(url);
@@ -55,7 +52,6 @@ export const Publicar = () => {
               const blob = await response.blob();
 
               let fileExtension = imagen.imagen.split(".").pop() || "png";
-              console.log("fileEx", fileExtension);
 
               return new File(
                 [blob],
@@ -73,6 +69,7 @@ export const Publicar = () => {
     };
 
     fetchPhotos();
+    console.log(singlePost)
   }, []);
 
   const SERVER_URL = env.SERVER_URL;
@@ -112,10 +109,6 @@ export const Publicar = () => {
     formData.append("coords", JSON.stringify(coords));
     formData.append("description", description);
 
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
-
     try {
       let fetch_url = "";
       if (post_id != null) {
@@ -124,7 +117,6 @@ export const Publicar = () => {
         fetch_url = `${SERVER_URL}/publicar-post/`;
       }
 
-      console.log("ID  ", JSON.stringify(tags));
 
       const authToken = Cookies.get("auth_token");
 
@@ -177,17 +169,15 @@ export const Publicar = () => {
     setPhotos(photos.filter((_, i) => i !== index));
   };
 
-  useEffect(() => {
-    if (singlePost) {
-      singlePost.etiquetas.forEach((element) => {
-        setTags([...tags, element.nombre]);
-      });
-    }
-  }, []);
 
   useEffect(() => {
-    console.log("FOTOOOS ---", photos);
-  }, [photos]);
+    console.log(tags)
+  }, [tags]);
+ 
+
+
+
+
 
   return (
     <>
@@ -315,8 +305,8 @@ export const Publicar = () => {
                 ></textarea>
               </div>
               <div>
-                <div className="flex justify-center w">
-                  <TagInput setPostTags={setTags} defaultTags={tags} />
+                <div className="flex justify-center h-full">
+                  <TagInput setPostTags={setTags} defaultTags={tags} toasts={toasts} setToast={setToast} toastViewed={toastViewed}/>
                 </div>
               </div>
             </div>

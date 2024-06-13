@@ -17,7 +17,6 @@ export const Descubrir = () => {
       const data = await response.json();
 
       if (data.status == "success") {
-        console.log(data);
         setMarkers(data.markers);
         setLoaded(true);
       }
@@ -28,7 +27,6 @@ export const Descubrir = () => {
 
   const onMarker = (marker) => {
     setMarkerData(marker);
-    console.log(marker);
   };
 
   useEffect(() => {
@@ -46,12 +44,12 @@ export const Descubrir = () => {
             <div className="flex flex-col w-full ">
               <div className="flex justify-between p-3 bg-white rounded-t-lg">
                 <p>#{markerData.autor}</p>
-                <Link to={`/usuario/${markerData.autor}`} >Ver perfil </Link>
+                <Link to={`/usuario/${markerData.autor}`}>Ver perfil </Link>
               </div>
               {markerData.imagenes && markerData.imagenes.length > 0 && (
                 <div className="flex justify-center items-center w-[400px] h-[300px] bg-white bg-opacity-30">
                   <img
-                  className="object-contain max-w-[400px] max-h-[300px] bg-opacity-30"
+                    className="object-contain max-w-[400px] max-h-[300px] bg-opacity-30"
                     src={`${env.SERVER_S3}/media/${markerData.imagenes[0].imagen}`}
                     alt="Profile Image"
                   />

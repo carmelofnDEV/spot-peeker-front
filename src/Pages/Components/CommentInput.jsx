@@ -2,26 +2,19 @@ import { useEffect } from "react";
 import { env } from "../../env";
 import Cookies from "js-cookie";
 
-
-
-export const CommentInput = ({setPostComments,postComments,id}) => {
-
+export const CommentInput = ({ setPostComments, postComments, id }) => {
   const handleComment = async (e) => {
-
     e.preventDefault();
-
-  
 
     const formData = new FormData(e.target);
     if (formData.get("comentario").length > 0) {
       const data = {
         post: id,
         comentario: formData.get("comentario"),
-        "auth_token":Cookies.get("auth_token"),
+        auth_token: Cookies.get("auth_token"),
       };
       e.target.reset();
       try {
-
         const response = await fetch(`${env.SERVER_URL}/comment-post/`, {
           method: "POST",
           body: JSON.stringify(data),
@@ -33,26 +26,13 @@ export const CommentInput = ({setPostComments,postComments,id}) => {
 
         const result = await response.json();
         if (result.status == "success") {
-          console.log(postComments)
-
           setPostComments([...postComments, result.comment]);
-      
-
         }
       } catch (error) {
         console.error("Error comment the post:", error);
       }
     }
-
-
-
-    
   };
-
-      useEffect(() => {
-      
-      console.log(postComments)
-    }, [postComments])
 
   return (
     <form

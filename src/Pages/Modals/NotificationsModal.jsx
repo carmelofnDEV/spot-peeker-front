@@ -26,7 +26,6 @@ export const NotificationsModal = ({
         },
       });
       const data = await response.json();
-      console.log("noti", data);
       setNotifications(data.notifications);
       let unviewed = 0;
       data.notifications.forEach((element) => {

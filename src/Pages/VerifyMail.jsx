@@ -10,7 +10,6 @@ export const VerifyMail = () => {
   const { token } = useParams();
 
   const verifyToken = async () => {
-    console.log(token);
     const dataT = {
       token: token,
     };

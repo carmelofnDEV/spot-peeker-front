@@ -16,22 +16,28 @@ export const useAuth = () => {
 
   const [errors, setErrors] = useState({});
 
-  const handleOnChangePassword = async () => {
-    const authToken = {
-      "auth_token": Cookies.get("auth_token"),
-    };
+  const handleOnChangePassword = async (mail = false) => {
+    let data_pass = "";
+
+    if (mail) {
+      data_pass = {
+        mail: mail,
+      };
+    } else {
+      data_pass = {
+        auth_token: Cookies.get("auth_token"),
+      };
+    }
 
     try {
       const response = await fetch(`${SERVER_URL}/change-password/`, {
         method: "POST",
 
         credentials: "include",
-        body: JSON.stringify(authToken),
+        body: JSON.stringify(data_pass),
       });
 
       const data = await response.json();
-
-      console.log("respuesta servidoraa, ", data);
 
       if (data.status == "success") {
         return true;
@@ -60,8 +66,6 @@ export const useAuth = () => {
         credentials: "include",
       });
       const data = await response.json();
-
-      console.log("respuesta servidoraa, ", data);
 
       if (data.status == true) {
         Cookies.remove("auth_token");
@@ -121,8 +125,6 @@ export const useAuth = () => {
       });
       const data = await response.json();
 
-      console.log("respuesta servidoraa, ", data);
-
       return data;
     } catch (error) {
       console.error("Server Error:", error);
@@ -149,7 +151,6 @@ export const useAuth = () => {
         body: JSON.stringify(authToken),
       });
       const data = await response.json();
-      console.log("logged?", data);
 
       setIsLoggedIn(data.valid);
     } catch (error) {

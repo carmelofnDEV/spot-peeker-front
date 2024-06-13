@@ -18,15 +18,14 @@ export const Login = () => {
   const recaptchaRef = useRef();
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
     recaptchaRef.current.execute();
+    loginCredentials(event);
+
   };
 
-  const handleCaptchaChange = (token) => {
-    setIsCaptchaVerified(true);
-    loginCredentials();
-  };
+
 
   const loginCredentials = async () => {
     let data = await checkLoginCredentials(event);
@@ -41,7 +40,7 @@ export const Login = () => {
 
   return (
     <div className="flex justify-center items-center mt-20 w-[100%] p-5 ">
-      <form onSubmit={handleLogin} className="lg:w-1/3 flex flex-col bg-[#dddddd] px-8 py-5 rounded-xl gap-5">
+      <form onSubmit={(e)=>{handleLogin(e)}} className="lg:w-1/3 flex flex-col bg-[#dddddd] px-8 py-5 rounded-xl gap-5">
         <div className="flex justify-center ">
           <img
             className="w-[80%]"
@@ -81,12 +80,13 @@ export const Login = () => {
 
         <div className='mt-5'>
             <a href="/register">Crear cuenta</a>
+            <a href="/recovery-password">Recuperar contraseña</a>
+
         </div>
 
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={env.RECAPTCHA_KEY}
-          onChange={handleCaptchaChange}
           size="invisible"
         />
       </form>
