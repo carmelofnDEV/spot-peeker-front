@@ -58,7 +58,7 @@ export const Navbar = () => {
                   ></path>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 ">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  ">
                 Home
               </span>
             </Link>
@@ -91,7 +91,7 @@ export const Navbar = () => {
                   ></path>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  dark:group-hover:hover:text-black ">
                 Descubrir
               </span>
             </Link>
@@ -118,7 +118,7 @@ export const Navbar = () => {
                   <path d="M12,1A11,11,0,1,0,23,12,11.013,11.013,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21Zm5-9a1,1,0,0,1-1,1H13v3a1,1,0,0,1-2,0V13H8a1,1,0,0,1,0-2h3V8a1,1,0,0,1,2,0v3h3A1,1,0,0,1,17,12Z"></path>
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  dark:group-hover:hover:text-black ">
                 Publicar
               </span>
             </Link>
@@ -177,7 +177,7 @@ export const Navbar = () => {
                   </g>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  dark:group-hover:hover:text-black ">
                 Perfil
               </span>
             </Link>
@@ -216,7 +216,7 @@ export const Navbar = () => {
                   ></path>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 ">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  ">
                 Home
               </span>
             </Link>
@@ -249,7 +249,7 @@ export const Navbar = () => {
                   ></path>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  dark:group-hover:hover:text-black ">
                 Descubrir
               </span>
             </Link>
@@ -308,7 +308,7 @@ export const Navbar = () => {
                   </g>{" "}
                 </g>
               </svg>
-              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:hover:text-black  dark:group-hover:hover:text-black ">
                 Login
               </span>
             </Link>
