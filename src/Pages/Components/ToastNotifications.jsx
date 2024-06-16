@@ -2,15 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export const ToastNotifications = () => {
-
-  const { toasts,setToast, toastViewed } = useContext(GlobalContext);
+  const { toasts, setToast, toastViewed } = useContext(GlobalContext);
 
   useEffect(() => {
-    
-    toastViewed()
-
-  }, [])
-  
+    toastViewed();
+  }, []);
 
   const removeToast = (indexToRemove) => {
     setToast((prevToasts) =>
@@ -114,21 +110,18 @@ export const ToastNotifications = () => {
             <div className="flex items-center w-full max-w-xs p-4 mb-4 text-black !font-[800] bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
               <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
                 <svg
-                  width="24px"
-                  height="24px"
-                  viewBox="0 0 24 24"
-                  role="img"
                   xmlns="http://www.w3.org/2000/svg"
-                  aria-labelledby="okIconTitle"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
                   stroke="#000000"
                   strokeWidth={2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  fill="none"
-                  color="#000000"
                 >
-                  <title id="okIconTitle">{"Ok"}</title>
-                  <polyline points="4 13 9 18 20 7" />
+                  <line x1={18} y1={6} x2={6} y2={18} />
+                  <line x1={6} y1={6} x2={18} y2={18} />
                 </svg>
                 <span className="sr-only">Check icon</span>
               </div>
@@ -140,17 +133,18 @@ export const ToastNotifications = () => {
               >
                 <span className="sr-only">Close</span>
                 <svg
-                  width="24px"
-                  height="24px"
-                  viewBox="0 0 16 16"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="#fff"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M8.6 1c1.6.1 3.1.9 4.2 2 1.3 1.4 2 3.1 2 5.1 0 1.6-.6 3.1-1.6 4.4-1 1.2-2.4 2.1-4 2.4-1.6.3-3.2.1-4.6-.7-1.4-.8-2.5-2-3.1-3.5C.9 9.2.8 7.5 1.3 6c.5-1.6 1.4-2.9 2.8-3.8C5.4 1.3 7 .9 8.6 1zm.5 12.9c1.3-.3 2.5-1 3.4-2.1.8-1.1 1.3-2.4 1.2-3.8 0-1.6-.6-3.2-1.7-4.3-1-1-2.2-1.6-3.6-1.7-1.3-.1-2.7.2-3.8 1-1.1.8-1.9 1.9-2.3 3.3-.4 1.3-.4 2.7.2 4 .6 1.3 1.5 2.3 2.7 3 1.2.7 2.6.9 3.9.6zM7.9 7.5L10.3 5l.7.7-2.4 2.5 2.4 2.5-.7.7-2.4-2.5-2.4 2.5-.7-.7 2.4-2.5-2.4-2.5.7-.7 2.4 2.5z"
-                  />
+                  <line x1={18} y1={6} x2={6} y2={18} />
+                  <line x1={6} y1={6} x2={18} y2={18} />
                 </svg>
               </button>
             </div>

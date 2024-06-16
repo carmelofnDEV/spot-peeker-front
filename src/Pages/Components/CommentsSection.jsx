@@ -69,20 +69,21 @@ export const CommentsSection = ({
       {postComments.map((comment, index) => (
         <li
           key={index}
-          className="flex items-start bg-white p-4 rounded-lg shadow-md mb-4 relative"
+          className="flex items-start bg-white p-4 rounded-lg shadow-md mb-4 relative border-black border-[3px]"
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="w-12 h-12 overflow-hidden rounded-full">
+          <div className="w-12 h-12 overflow-hidden border-black border-[2px] rounded-full">
             <img
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full "
               src={`${comment.pic}`}
               alt={`comment_pic_${index}`}
             />
           </div>
           <div className="ml-3">
-            <p className="font-semibold text-gray-800">{comment.username}</p>
-            <p className="text-gray-600">{comment.content}</p>
+                    
+            <a href={`/usuario/${comment.username}`} className="font-[800] text-black text-[18px] hover:underline">#{comment.username}</a>
+            <p className="text-black text-[17px] pl-4 font-[500]">{comment.content}</p>
           </div>
           {hoverIndex === index &&
             (user.username === comment.username || isOwner) && (

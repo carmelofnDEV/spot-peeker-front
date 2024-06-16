@@ -18,8 +18,6 @@ export const EditProfileModal = ({
     }
   };
 
-
-
   const [privateOption, setPrivateOption] = useState(profileInfo.es_privado);
 
   const username = useRef(null);
@@ -63,7 +61,6 @@ export const EditProfileModal = ({
           if (data.errors) {
             setErrors(data.errors);
           }
-
         }
       } catch (error) {
         console.error("Error al subir la imagen:", error);
@@ -79,9 +76,8 @@ export const EditProfileModal = ({
 
   const handleClose = () => {
     setErrors({});
-    onClose()
-  }
-
+    onClose();
+  };
 
   const changeOption = (e) => {
     setPrivateOption(!privateOption);
@@ -90,11 +86,14 @@ export const EditProfileModal = ({
   return (
     isOpen && (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center z-40 bg-black bg-opacity-20">
-        <div className="relative p-8 rounded-lg flex flex-col justify-center items-center w-[70%] overflow-hidden">
-          <div className=" w-full max-w-md bg-white rounded-lg overflow-y-auto">
-            <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-4">
-              <h3 className="font-semibold text-lg">Ajustes del perfil</h3>
-              <button className="text-white p-1 rounded-lg" onClick={handleClose}>
+        <div className="relative p-8 rounded-lg flex flex-col justify-center items-center  overflow-hidden">
+          <div className=" border-[3px] border-black w-full  bg-white rounded-lg overflow-y-hidden">
+            <div className="flex justify-between bg-[#d1d5db] border-b-[3px] border-black text-gray-700 px-6 py-4">
+              <h3 className="font-[900] text-[20px] text-black">Perfil</h3>
+              <button
+                className="text-white p-1 rounded-lg"
+                onClick={handleClose}
+              >
                 <svg
                   width="24px"
                   height="24px"
@@ -113,20 +112,20 @@ export const EditProfileModal = ({
               onSubmit={handleEdit}
               className="!text-[20px] divide-y divide-gray-200 "
             >
-              <div className="px-8 py-5">
-                <div className="mb-10">
+              <div className=" ">
+                <div className="mb-10 px-10 pt-4">
                   <label
                     className="block  font-medium text-gray-700"
                     htmlFor="usuario"
                   >
-                    Cambiar usuario:
+                    Cambiar nombre de usuario:
                   </label>
                   <input
                     ref={username}
                     required
                     id="usuario"
                     type="text"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:"
+                    className="mt-1 block w-full px-4 py-2 border-[3px] border-black focus:border-black focus:ring-0 rounded-md shadow-sm  "
                     placeholder="Usuario"
                     defaultValue={profileInfo.userData.username}
                     onChange={(e) => {
@@ -184,7 +183,7 @@ export const EditProfileModal = ({
                     </span>
                   )}
                 </div>
-                <div className="!mb-10">
+                <div className="!mb-10 px-10">
                   <label
                     className="block  font-medium text-gray-700"
                     htmlFor="biografia"
@@ -195,7 +194,7 @@ export const EditProfileModal = ({
                     ref={bio}
                     id="biografia"
                     rows="4"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:"
+                    className="mt-1 block w-full px-4 py-2 border-[3px] border-black focus:border-black rounded-md shadow-sm focus:ring-0 "
                     placeholder="Cuéntanos sobre ti..."
                     defaultValue={profileInfo.profileData.biografia}
                   ></textarea>
@@ -225,7 +224,7 @@ export const EditProfileModal = ({
                     </span>
                   )}
                 </div>
-                <div className="mb-20">
+                <div className="mb-[20%] px-10">
                   <label className="flex gap-3 items-center cursor-pointer">
                     <span className="font-medium text-gray-900 dark:text-gray-300">
                       Cuenta oculta:
@@ -236,20 +235,22 @@ export const EditProfileModal = ({
                         changeOption(e);
                       }}
                       checked={privateOption ? "checked" : ""}
-                      className="sr-only peer"
+                      className="sr-only peer bg-black"
                     />
-                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none  peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <div className="relative w-11 h-6 bg-black peer-focus:outline-none  peer-focus:ring-blue-300 dark:peer-focus:ring-black rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-[#76885b]"></div>
                   </label>
                 </div>
-                <div className="flex mb-10 items-end">
-                  <div>
+                <div className="flex gap-32 w-full border-black border-t-[3px] px-2 py-4 ">
+                  <div className="flex w-full items-end">
                     <button
                       onClick={handleChangePassword}
                       className="flex items-center  gap-1 py-2 px-4 bg-red-500 rounded-lg"
                     >
-                      <span className="text-[16px]">Cambiar contraseña</span>
+                      <span className="text-[16px] text-white whitespace-nowrap overflow-hidden">
+                        Cambiar contraseña
+                      </span>
                       <svg
-                        fill="#000000"
+                        fill="#fff"
                         width="20px"
                         height="20px"
                         viewBox="0 0 24 24"
@@ -259,38 +260,36 @@ export const EditProfileModal = ({
                       </svg>
                     </button>
                   </div>
-                </div>
 
-                <div className="flex  items-end">
-                  <div>
+                  <div className="flex w-full bg-black rounded-lg justify-between items-end">
                     <button
                       type="button"
                       onClick={handleLogOut}
-                      className="flex items-center  gap-1 py-2 px-4 bg-gray-100 rounded-lg"
+                      className="flex items-center  gap-2 py-2 px-4 "
                     >
-                      <span className="text-[16px]">Cerrar sesion</span>
+                      <span className="text-[16px] text-white">Cerrar sesion</span>
                       <svg
-                        width="20px"
-                        height="20px"
+                        width="18px"
+                        height="18px"
                         viewBox="0 0 15 15"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           d="M13.5 7.5L10.5 10.75M13.5 7.5L10.5 4.5M13.5 7.5L4 7.5M8 13.5H1.5L1.5 1.5L8 1.5"
-                          stroke="#000000"
+                          stroke="#fff"
                         />
                       </svg>
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="flex w-full bg-gray-200 justify-end p-2">
+              <div className="flex w-full bg-[#d1d5db] justify-end p-2  !border-black !border-t-[3px]">
                 <button
                   type="submit"
-                  className="flex gap-2 items-center py-2 px-4 border-[1px] border-gray-300 rounded-lg"
+                  className="flex gap-2 items-center py-2 px-4 border-[1px] bg-black rounded-lg"
                 >
-                  <span className="text-[18px]">Hecho</span>
+                  <span className="text-[18px] text-white">Hecho</span>
                   <svg
                     width="20px"
                     height="20px"
@@ -298,12 +297,12 @@ export const EditProfileModal = ({
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-labelledby="okIconTitle"
-                    stroke="#000000"
+                    stroke="#fff"
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    color="#000000"
+                    color="#fff"
                   >
                     <polyline points="4 13 9 18 20 7" />
                   </svg>

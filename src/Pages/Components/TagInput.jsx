@@ -61,7 +61,7 @@ export const TagInput = ({
         <div className={tags.length >= 4 ? "hidden" : "w-full flex gap-3"}>
           <input
             onKeyDown={handleKeyDown}
-            className="w-full bg-[#fafafa] py-1 px-2 rounded-md"
+            className="w-full bg-white py-1 border-black border-[2px] px-2 rounded-md"
             type="text"
             value={inputValue}
             onChange={handleInputChange}
@@ -70,18 +70,31 @@ export const TagInput = ({
           />
           <button
             type="button"
-            className="bg-[#fafafa] py-1 px-2 rounded-md"
+            className="bg-black py-1 px-2 rounded-md"
             onClick={handleAddTag}
             disabled={tags.length >= 4}
           >
-            Añadir
+            <svg
+              fill="#fff"
+              height="20px"
+              width="20px"
+              id="Layer_1"
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+            >
+              <polygon
+                className="cls-1"
+                points="13 7 9 7 9 3 7 3 7 7 3 7 3 9 7 9 7 13 9 13 9 9 13 9 13 7"
+              />
+            </svg>
           </button>
         </div>
         <div className={tags.length >= 4 ? "w-full flex gap-3" : "hidden"}>
           <p className="text-[20px]">Colaboradores:</p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-3 p-3 h-14 overflow-y-auto rounded-md bg-white border-1 mt-2 w-full ">
+      <div className="flex flex-wrap gap-3 p-3 h-14 overflow-y-auto rounded-md bg-white border-[3px] border-black mt-2 w-full ">
         {tags.map((tag, index) => (
           <div
             key={index}

@@ -46,8 +46,8 @@ export const DeletePostModal = ({
     isOpen && (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center z-40 bg-black bg-opacity-20">
         <div className="relative p-8 rounded-lg flex flex-col justify-center items-center w-[70%] overflow-hidden">
-          <div className=" w-full max-w-md bg-white rounded-lg overflow-y-auto">
-            <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-4">
+          <div className=" w-full max-w-md bg-white rounded-lg overflow-y-auto border-[3px] border-black">
+            <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-3 border-b-[3px] border-black">
               <h3 className="font-semibold text-lg">¿Eliminar publicación?</h3>
               <button className="text-white p-1 rounded-lg" onClick={onClose}>
                 <svg
@@ -64,6 +64,8 @@ export const DeletePostModal = ({
                 </svg>
               </button>
             </div>
+            <h3 className="font-semibold text-md px-4 py-3">¿Estas seguro que deseas eliminar esta publicación?</h3>
+
             <div className="w-full flex justify-end py-4 px-10 gap-5">
               <button className="py-1 px-8 bg-red-500 rounded-lg text-white " onClick={handleOnDeletePost}>
                 Si

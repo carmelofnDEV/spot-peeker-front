@@ -26,15 +26,13 @@ export const Publicar = () => {
   };
 
   useEffect(() => {
-    
     const fetchPhotos = async () => {
       try {
         const photosArray = await Promise.all(
           singlePost.imagenes
             .map(async (imagen) => {
-
-
               const url = `${env.SERVER_S3}/media/${imagen.imagen}`;
+
               const options = {
                 mode: "cors",
               };
@@ -116,7 +114,6 @@ export const Publicar = () => {
         fetch_url = `${SERVER_URL}/publicar-post/`;
       }
 
-
       const authToken = Cookies.get("auth_token");
 
       formData.append("auth_token", authToken);
@@ -168,17 +165,11 @@ export const Publicar = () => {
     setPhotos(photos.filter((_, i) => i !== index));
   };
 
-
-
-
-
-
-
   return (
     <>
       <div className="flex justify-center items-center  w-[100%] mt-5 ">
-        <div className="w-1/2 flex flex-col shadow-2xl bg-[#dddddd] rounded-lg  gap-5">
-          <div className="w-full bg-gray-300 rounded-lg py-2 px-4">
+        <div className="w-1/2 flex border-[3px] border-black flex-col shadow-2xl bg-[#dddddd] rounded-lg  gap-5">
+          <div className="w-full border-b-[3px] border-black bg-gray-300 rounded-t-lg py-2 px-4">
             <Link to="/perfil">
               <svg
                 width="40px"
@@ -208,22 +199,22 @@ export const Publicar = () => {
           </div>
           <form
             onSubmit={handleFormSubmit}
-            className="flex flex-col  px-10 py-5 rounded-xl gap-5"
+            className="flex flex-col   rounded-xl gap-5"
           >
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-3 px-10 ">
               {photos.map((file, index) => (
                 <div key={index} className="relative group">
                   {file.url ? (
                     <img
                       src={file.preview}
                       alt={`Foto ${index}`}
-                      className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff]"
+                      className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff] border-black border-[2px]"
                     />
                   ) : (
                     <img
                       src={URL.createObjectURL(file)}
                       alt={`Foto ${index}`}
-                      className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff]"
+                      className="rounded-lg h-[12em] w-full object-cover bg-[#ffffff] border-black border-[2px]"
                     />
                   )}
 
@@ -253,7 +244,7 @@ export const Publicar = () => {
               {photos.length < 4 ? (
                 <label
                   htmlFor="dropzone-file"
-                  className="h-[12em] w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="h-[12em] w-full border-2 border-black border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -287,13 +278,13 @@ export const Publicar = () => {
               ) : null}
             </div>
 
-            <div className="grid grid-cols-2 gap-5 h-50">
+            <div className="grid grid-cols-2 gap-5 h-50 px-10 ">
               <div>
                 <textarea
                   id="message"
                   rows="4"
                   name="description"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-[3px] border-black focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Descripción del post"
                   onChange={handleDescription}
                   defaultValue={singlePost?.descripcion || ""}
@@ -301,11 +292,17 @@ export const Publicar = () => {
               </div>
               <div>
                 <div className="flex justify-center h-full">
-                  <TagInput setPostTags={setTags} defaultTags={tags} toasts={toasts} setToast={setToast} toastViewed={toastViewed}/>
+                  <TagInput
+                    setPostTags={setTags}
+                    defaultTags={tags}
+                    toasts={toasts}
+                    setToast={setToast}
+                    toastViewed={toastViewed}
+                  />
                 </div>
               </div>
             </div>
-            <div className="w-full h-[300px] ">
+            <div className=" px-10 w-full h-[300px] ">
               <GMap
                 setCoords={setCoords}
                 defaultMarker={
@@ -316,75 +313,75 @@ export const Publicar = () => {
               />
             </div>
             {singlePost === undefined ? (
-              <div className="w-full flex justify-end items-end mt-10">
-                <div className="flex justify-center gap-2 items-center cursor-pointer	 px-4 py-1 border-[1px] border-black rounded-lg">
-                  <button type="submit" className="flex items-center gap-2">
-                    <span>Publicar</span>
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 24 24"
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-labelledby="okIconTitle"
-                      stroke="#000000"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      fill="none"
-                      color="#000000"
-                    >
-                      <polyline points="4 13 9 18 20 7" />
-                    </svg>
-                  </button>
-                </div>
+              <div className="w-full bg-[#d1d5db] py-4 border-t-[3px] border-black px-4 rounded-b-lg flex justify-end items-end mt-10">
+                <button
+                  type="submit"
+                  className="bg-black text-white flex justify-center gap-2 items-center cursor-pointer	 px-4 py-1 border-[1px] border-black rounded-lg"
+                >
+                  <span>Publicar</span>
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-labelledby="okIconTitle"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    color="#000000"
+                  >
+                    <polyline points="4 13 9 18 20 7" />
+                  </svg>
+                </button>
               </div>
             ) : (
-              <div className="w-full flex justify-between items-end mt-10">
-                <div className="flex justify-center gap-2 items-center cursor-pointer	  border-[1px] ">
-                  <button
-                    onClick={openDeleteModal}
-                    type="button"
-                    className="bg-red-500 flex justify-center items-center gap-2 px-4 py-1 rounded-lg"
+              <div className="w-full flex bg-[#d1d5db] py-4 border-t-[3px] border-black px-4  justify-between items-end mt-10">
+                <button
+                  onClick={openDeleteModal}
+                  type="button"
+                  className="bg-red-500 flex justify-center items-center gap-2 px-4 py-1 rounded-lg"
+                >
+                  <span className="text-white">Eliminar </span>
+                  <svg
+                    fill="#fff"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 52 52"
+                    enableBackground="new 0 0 52 52"
+                    xmlSpace="preserve"
                   >
-                    <span className="text-white">Eliminar </span>
-                    <svg
-                      fill="#fff"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18px"
-                      height="18px"
-                      viewBox="0 0 52 52"
-                      enableBackground="new 0 0 52 52"
-                      xmlSpace="preserve"
-                    >
-                      <g>
-                        <path d="M45.5,10H33V6c0-2.2-1.8-4-4-4h-6c-2.2,0-4,1.8-4,4v4H6.5C5.7,10,5,10.7,5,11.5v3C5,15.3,5.7,16,6.5,16h39 c0.8,0,1.5-0.7,1.5-1.5v-3C47,10.7,46.3,10,45.5,10z M23,7c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1v3h-6V7z" />
-                        <path d="M41.5,20h-31C9.7,20,9,20.7,9,21.5V45c0,2.8,2.2,5,5,5h24c2.8,0,5-2.2,5-5V21.5C43,20.7,42.3,20,41.5,20z  M23,42c0,0.6-0.4,1-1,1h-2c-0.6,0-1-0.4-1-1V28c0-0.6,0.4-1,1-1h2c0.6,0,1,0.4,1,1V42z M33,42c0,0.6-0.4,1-1,1h-2 c-0.6,0-1-0.4-1-1V28c0-0.6,0.4-1,1-1h2c0.6,0,1,0.4,1,1V42z" />
-                      </g>
-                    </svg>
-                  </button>
-                </div>
-                <div className="flex justify-center gap-2 items-center cursor-pointer	 px-4 py-1 border-[1px] border-black rounded-lg">
-                  <button type="submit" className="flex items-center gap-2">
-                    <span>Editar</span>
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 24 24"
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-labelledby="okIconTitle"
-                      stroke="#000000"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      fill="none"
-                      color="#000000"
-                    >
-                      <polyline points="4 13 9 18 20 7" />
-                    </svg>
-                  </button>
-                </div>
+                    <g>
+                      <path d="M45.5,10H33V6c0-2.2-1.8-4-4-4h-6c-2.2,0-4,1.8-4,4v4H6.5C5.7,10,5,10.7,5,11.5v3C5,15.3,5.7,16,6.5,16h39 c0.8,0,1.5-0.7,1.5-1.5v-3C47,10.7,46.3,10,45.5,10z M23,7c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1v3h-6V7z" />
+                      <path d="M41.5,20h-31C9.7,20,9,20.7,9,21.5V45c0,2.8,2.2,5,5,5h24c2.8,0,5-2.2,5-5V21.5C43,20.7,42.3,20,41.5,20z  M23,42c0,0.6-0.4,1-1,1h-2c-0.6,0-1-0.4-1-1V28c0-0.6,0.4-1,1-1h2c0.6,0,1,0.4,1,1V42z M33,42c0,0.6-0.4,1-1,1h-2 c-0.6,0-1-0.4-1-1V28c0-0.6,0.4-1,1-1h2c0.6,0,1,0.4,1,1V42z" />
+                    </g>
+                  </svg>
+                </button>
+                <button
+                  type="submit"
+                  className="bg-black text-white flex justify-center gap-2 items-center cursor-pointer px-4 py-1 border-[1px] border-black rounded-lg"
+                >
+                  <span>Editar</span>
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-labelledby="okIconTitle"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    color="#000000"
+                  >
+                    <polyline points="4 13 9 18 20 7" />
+                  </svg>
+                </button>
               </div>
             )}
           </form>

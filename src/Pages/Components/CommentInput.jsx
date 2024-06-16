@@ -37,18 +37,18 @@ export const CommentInput = ({ setPostComments, postComments, id }) => {
   return (
     <form
       onSubmit={handleComment}
-      className="flex w-full p-3 bg-gray-100 rounded-t-md  "
+      className="flex w-full p-3 border-black border-t-[3px] bg-[#d1d5db] "
     >
       <input
         type="text"
         name="comentario"
         id="comentario"
-        className="w-full p-2 bg-white rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        className="w-full p-2 bg-white rounded-md border-[3px] border-black  focus:border-black focus:ring-0"
         placeholder="Escribe un comentario..."
       />
       <button
         type="submit"
-        className="p-2 ml-2 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:ring-blue-400"
+        className="px-2.5 ml-1 bg-black rounded-md hover:bg-gray-400  "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ export const CommentInput = ({ setPostComments, postComments, id }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="white"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

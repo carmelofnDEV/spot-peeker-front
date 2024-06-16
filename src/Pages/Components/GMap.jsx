@@ -24,6 +24,7 @@ export const GMap = ({
     height: "100%",
     width: "100%",
     borderRadius: "10px 0 0 10px", // 10px para todas las esquinas excepto arriba derecha
+    border:"3px solid",
   };
 
   const handleMapClick = (event) => {

@@ -54,8 +54,8 @@ export const NotificationsModal = ({
     isOpen && (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center z-40 bg-black bg-opacity-20">
         <div className="relative p-8 rounded-lg flex flex-col justify-center items-center w-[70%] overflow-hidden">
-          <div className="h-[80vh] w-full max-w-md bg-white rounded-lg overflow-y-auto">
-            <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-4">
+          <div className="h-[70vh] border-[3px] border-black w-full max-w-md bg-white rounded-lg overflow-y-auto">
+            <div className="flex justify-between bg-gray-200 text-gray-700 px-6 py-4 border-b-[3px] border-black">
               <h3 className="font-semibold text-lg">Notificaciones</h3>
               <button className="text-white p-1 rounded-lg" onClick={onClose}>
                 <svg
@@ -81,14 +81,14 @@ export const NotificationsModal = ({
                   >
                     <a
                       href={`/usuario/${notification.emisor}/`}
-                      className="font-semibold hover:underline"
+                      className="font-[700] text-[18px] hover:underline"
                     >
-                      {notification.emisor}
+                      #{notification.emisor}
                     </a>
 
                     {notification.action === "l"
-                      ? " ha dado like a una publicación"
-                      : " ha empezado a seguirte"}
+                      ? <span className="text-[16px] font-[400]"> ha dado like a una publicación</span>
+                      : <span> ha empezado a seguirte</span>}
                   </li>
                 ))}
               </ul>
