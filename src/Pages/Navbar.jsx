@@ -30,7 +30,7 @@ export const Navbar = () => {
           <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium border-black border-t-[3px] ">
             <Link
               to="/"
-              className="border-l-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black border-l-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className=" mb-2 "
@@ -65,7 +65,7 @@ export const Navbar = () => {
 
             <Link
               to="/descubrir"
-              className="border-l-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black border-l-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className="mb-2"
@@ -98,7 +98,7 @@ export const Navbar = () => {
 
             <Link
               to="/publicar"
-              className="border-x-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black border-x-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className="mb-2"
@@ -125,7 +125,7 @@ export const Navbar = () => {
 
             <Link
               to="/perfil"
-              className="border-r-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black border-r-[3px] border-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className="mb-2"
@@ -188,7 +188,7 @@ export const Navbar = () => {
           <div className="grid h-full max-w-lg grid-cols-3 mx-auto font-medium border-black border-t-[3px] ">
             <Link
               to="/"
-              className="inline-flex flex-col items-center justify-center px-5  bg-white border-black border-x-[3px] border-x hover:bg-[#dddddd]  group dark:border-gray-600"
+              className="hover:text-black inline-flex flex-col items-center justify-center px-5  bg-white border-black border-x-[3px] border-x hover:bg-[#dddddd]  group dark:border-gray-600"
             >
               <svg
                 className=" mb-2 "
@@ -223,7 +223,7 @@ export const Navbar = () => {
 
             <Link
               to="/descubrir"
-              className="inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black inline-flex flex-col items-center justify-center px-5  bg-white   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className="mb-2"
@@ -256,7 +256,7 @@ export const Navbar = () => {
 
             <Link
               to="/login"
-              className="inline-flex flex-col items-center justify-center px-5  bg-white border-black border-x-[3px]   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
+              className="hover:text-black inline-flex flex-col items-center justify-center px-5  bg-white border-black border-x-[3px]   hover:bg-[#dddddd] dark:hover:bg-gray-800 group dark:border-gray-600"
             >
               <svg
                 className="mb-2"
