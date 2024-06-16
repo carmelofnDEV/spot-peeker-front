@@ -61,7 +61,7 @@ export const TagInput = ({
         <div className={tags.length >= 4 ? "hidden" : "w-full flex gap-3"}>
           <input
             onKeyDown={handleKeyDown}
-            className="w-full bg-white py-1 border-black border-[2px] px-2 rounded-md"
+            className="w-full bg-white py-1 border-black border-[2px] px-2 rounded-md focus:border-black focus:ring-0"
             type="text"
             value={inputValue}
             onChange={handleInputChange}

@@ -96,21 +96,21 @@ export const ChangePasswordForm = () => {
       {verified ? (
         <div className="w-full h-[100vh] flex justify-center mt-[30vh] rounded-t-lg">
           <div className="flex flex-col ">
-            <div className="bg-gray-200 rounded-t-lg py-2 px-10 ">
+            <div className="bg-gray-200 rounded-t-lg py-2 px-10 border-black border-[3px] border-b-0">
               <p className="text-[30px] font-[500] mr-20">
                 Restablecer contraseña
               </p>
             </div>
 
-            <div className="flex flex-col bg-white rounded  py-4 px-10">
+            <div className="flex flex-col bg-white border-black border-[3px]  py-4 px-10">
               <form
                 onSubmit={(e) => {
                   handloChangePassword(e);
                 }}
               >
                 <div className="flex flex-col">
-                  <label htmlFor="password">Contraseña:</label>
-                  <input type="password" ref={pass} id="password" required />
+                  <label className="text-[20px] font-[800]" htmlFor="password">Contraseña:</label>
+                  <input className="focus:ring-0 focus:border-black border-[3px] border-black rounded-md" type="password" ref={pass} id="password" required />
 
                   {errors.short_password && (
                     <span className="flex gap-1 items-center mt-3 !text-[#ef4444] text-[18px]">
@@ -139,12 +139,13 @@ export const ChangePasswordForm = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="rep_password">Repetir contraseña:</label>
+                  <label  className="text-[20px] font-[800] mt-3" htmlFor="rep_password">Repetir contraseña:</label>
                   <input
                     type="password"
                     id="rep_password"
                     ref={repeat}
                     required
+                    className="border-[3px] border-black rounded-md focus:ring-0 focus:border-black"
                   />
 
                   {errors.different_password && (
@@ -175,7 +176,7 @@ export const ChangePasswordForm = () => {
                   )}
                 </div>
                 <div className="flex w-full justify-end py-4 mt-5">
-                  <button className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80">
+                  <button className="flex items-center gap-2 py-2 px-4 rounded-lg border-[1px] bg-black text-white">
                     <span>Cambiar contraseña</span>
                     <svg
                       width="24px"
@@ -184,7 +185,7 @@ export const ChangePasswordForm = () => {
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       aria-labelledby="okIconTitle"
-                      stroke="#000000"
+                      stroke="#fff"
                       strokeWidth={2}
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -201,9 +202,9 @@ export const ChangePasswordForm = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full h-[100vh] flex justify-center mt-[30vh] rounded-t-lg">
+        <div className="w-full h-[100vh] flex justify-center mt-[30vh] ">
           <div className="flex flex-col ">
-            <div className="bg-gray-200 rounded-t-lg">
+            <div className="bg-[#d1d5db] rounded-t-lg border-black border-[3px] border-b-0">
               <img
                 className="py-4 px-8 max-h-[10vh]"
                 src={`${env.SERVER_URL}/static/logo-home.png`}
@@ -211,14 +212,16 @@ export const ChangePasswordForm = () => {
               />
             </div>
 
-            <div className="flex flex-col bg-white rounded  py-4 px-10">
-              <p className="text-[30px] font-[500]">Este token no es valido.</p>
-              <div className="flex w-full justify-end py-4 mt-5">
+            <div className="flex flex-col bg-white  border-black border-[3px] ">
+              <p className="text-[30px] font-[500] px-10 py-10">
+                Este token NO es valido...
+              </p>
+              <div className="flex w-full justify-end bg-[#d1d5db] py-4 px-2 border-black border-t-[3px]">
                 <a
-                  className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-[#76885b] bg-opacity-100 hover:bg-opacity-80"
+                  className="flex items-center gap-2 py-2 px-6 rounded-lg border-[1px] bg-black bg-opacity-100 hover:bg-opacity-80"
                   href="/"
                 >
-                  <span className="text-[18px] font-[700]">Ok</span>
+                  <span className="text-[18px] font-[700] text-white">Ok</span>
                   <svg
                     width="24px"
                     height="24px"
@@ -226,12 +229,12 @@ export const ChangePasswordForm = () => {
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-labelledby="okIconTitle"
-                    stroke="#000000"
+                    stroke="#fff"
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    color="#000000"
+                    color="#fff"
                   >
                     <title id="okIconTitle">{"Ok"}</title>
                     <polyline points="4 13 9 18 20 7" />

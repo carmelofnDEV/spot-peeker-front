@@ -15,6 +15,8 @@ export const Navbar = () => {
     "/editar-post/",
     "/cambiar-contraseña",
     "/cambiar-contraseña/",
+    "/change-password/",
+    "/change-password"
   ];
 
   if (excludedPaths.includes(window.location.pathname)) {

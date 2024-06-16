@@ -210,9 +210,13 @@ export const ProfileInfo = ({
               </div>
             </div>
 
-            <div className="italic border-t-[3px] border-black py-8 text-[20px] font-[500]">
-              " {profileInfo.profileData.biografia} "
-            </div>
+            {profileInfo?.profileData?.biografia?.length > 0 ? (
+              <div className="italic border-t-[3px] border-black py-8 text-[20px] font-[500]">
+                "{profileInfo.profileData.biografia}"
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
         <div></div>
@@ -246,7 +250,11 @@ export const ProfileInfo = ({
       </Suspense>
 
       <Suspense fallback={<div>Loading...</div>}>
-          <PicProfileModal onClose={modalOnClose} onSuccess={onSuccess}  isOpen={modalOpen} />
+        <PicProfileModal
+          onClose={modalOnClose}
+          onSuccess={onSuccess}
+          isOpen={modalOpen}
+        />
       </Suspense>
     </>
   );

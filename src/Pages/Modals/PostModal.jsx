@@ -219,7 +219,7 @@ export const PostModal = ({
               </div>
               <div className="flex ">
                 {logged ? (
-                  <div className="p-3  flex gap-3 border-black border-l-[3px]">
+                  <div className="p-3  flex gap-3 ">
                     <button onClick={handleLike} className="text-lg">
                       {isLiking ? (
                         <svg
